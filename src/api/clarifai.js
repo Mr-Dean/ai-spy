@@ -20,7 +20,7 @@ const APP_ID = 'main';
 // Change these to whatever model and image URL you want to use
 const MODEL_ID = 'general-image-detection';
 const MODEL_VERSION_ID = '1580bb1932594c93b7e2e04456af7c6f';    
-const IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
+const IMAGE_URL = url;
 
 ///////////////////////////////////////////////////////////////////////////////////
 // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
@@ -55,18 +55,15 @@ const requestOptions = {
 // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
 // this will default to the latest version_id
 
-let data = []
 
-fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
+
+return fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.json())
     .then(results => {
-        console.log(results.outputs[0].data.regions);
-        data = results.outputs[0].data.regions;
-        console.log('DATA', data)
+        return results.outputs[0].data.regions;
     })
     .catch(error => console.log('error', error));
 
-    return
 }
 
 
