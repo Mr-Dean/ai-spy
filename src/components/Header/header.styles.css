@@ -1,6 +1,11 @@
-nav {
+.header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 15px
 }
+
+.robot-eye {
+    width: 120px;
+}
+
