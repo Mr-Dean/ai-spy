@@ -1,3 +1,10 @@
+.found-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 p {
     font-family: 'Ubuntu', sans-serif;
     font-size: 1rem;

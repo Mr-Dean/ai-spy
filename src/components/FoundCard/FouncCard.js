@@ -10,9 +10,9 @@ const FoundCard = ({found}) => {
  
     return (
         <div className='found-card'>
-            <h4>I spy with my little ai eye....</h4>
+            <p>I spy with my little ai eye....</p>
             {
-               Object.entries(count).map(([key, value], i) => <p id={i}>{key}: {value}</p>)
+               Object.entries(count).map(([key, value], i) => <p key={i}>{key} x {value}</p>)
             }
         
         </div>

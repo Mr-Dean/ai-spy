@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import ImageLinkForm from "../components/ImageLinkForm/ImageLinkForm";
 import Button from "../components/Button/Button";
@@ -13,6 +13,15 @@ const AiSpy = ({handleReset}) => {
   const [data, setData] = useState();
   const [imageUrl, setImageUrl] = useState();
 
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    fetch('http://localhost:3000/')
+    .then(res => res.json())
+    .then(res => setCount(res.count))
+    .catch(err => console.log(err))
+  }, []);
+
   let found = []
 
   const handleInput = (e) => {
@@ -24,6 +33,16 @@ const AiSpy = ({handleReset}) => {
     setImageUrl(input);
     setData(data);
     setInput("");
+    
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'Fetch PUT Request Example' })
+    }
+
+    fetch('http://localhost:3000/count', requestOptions)
+      .then(response => response.json())
+      .catch(err => console.log(err));
   }
 
 
@@ -31,7 +50,6 @@ const AiSpy = ({handleReset}) => {
     for (let i = 0; i < data.length; i++) {
       found.push(data[i].data.concepts[0].name);
     }
-
   } else {
     console.log('no data')
   }
@@ -44,7 +62,7 @@ const AiSpy = ({handleReset}) => {
         !data || data === 'error' ?
         <>
         <ImageLinkForm handleInput={handleInput} getData={getData} />
-        <p>So far, I've spied 1,563,450 times.</p>
+        <p>So far, I've spied {count} things.</p>
         </>
         :
         data === 'error' ?
