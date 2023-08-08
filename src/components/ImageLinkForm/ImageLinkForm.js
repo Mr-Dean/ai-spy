@@ -6,7 +6,7 @@ const ImageLinkForm = ({ handleInput, getData}) => {
        <div className='form-container'>
         <p>Give me an image and I will tell you what's in it.</p>
         <input type='text' placeholder="Paste a link to an image here..." onChange={handleInput}/> 
-        <Button handleCLick={getData} text='DETECT' />
+        <Button handleCLick={getData} text='Detect' />
        </div>
     )
 }
