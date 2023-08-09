@@ -1,6 +1,6 @@
 export default function clarifaiAPI(url) {
 
-    const PAT = 'f8e10948cbf9420f85a5fcf3d7d7290a';
+    const PAT = process.env.REACT_APP_CLARIFAI_PAT;
 
     const USER_ID = 'clarifai';       
     const APP_ID = 'main';
