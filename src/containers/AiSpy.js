@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
+
 import Header from "../components/Header/Header";
 import ImageLinkForm from "../components/ImageLinkForm/ImageLinkForm";
 import Button from "../components/Button/Button";
@@ -16,10 +18,13 @@ const AiSpy = ({handleReset}) => {
   const [count, setCount] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:3000/')
-    .then(res => res.json())
-    .then(res => setCount(res.count))
-    .catch(err => console.log(err))
+    axios.get('http://localhost:3000/')
+      .then(response => {
+        setCount(response.data.count);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
 
   let found = []
@@ -28,22 +33,30 @@ const AiSpy = ({handleReset}) => {
     setInput(e.target.value);
   }
 
+  
   const getData = async () => {
     const data = await clarifaiAPI(input);
     setImageUrl(input);
     setData(data);
     setInput("");
     
-    const requestOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: 'Fetch PUT Request Example' })
-    }
-
-    fetch('http://localhost:3000/count', requestOptions)
-      .then(response => response.json())
-      .catch(err => console.log(err));
+    setCount(count => {
+      const updatedCount = count + 1;
+      updateCount(updatedCount);
+      return updatedCount; 
+    });
   }
+
+  const updateCount = async (newCount) => {
+    try {
+      const response = await axios.put('http://localhost:3000/api/updateCount', { count: newCount });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
 
 
   if (data && data !== 'error') {
