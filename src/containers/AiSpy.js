@@ -20,7 +20,8 @@ const AiSpy = ({handleReset}) => {
   useEffect(() => {
     axios.get('http://localhost:3000/')
       .then(response => {
-        setCount(response.data.count);
+        console.log(response.data[0].count)
+        setCount(parseInt(response.data[0].count)); //count parsed to int.
       })
       .catch(error => {
         console.log(error);
@@ -49,14 +50,20 @@ const AiSpy = ({handleReset}) => {
 
   const updateCount = async (newCount) => {
     try {
-      const response = await axios.put('http://localhost:3000/api/updateCount', { count: newCount });
+      const response = await axios.put(
+        'http://localhost:3000/api/updateCount',
+        { count: newCount },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error('Error updating count:', error);
     }
   };
-
-  
 
 
   if (data && data !== 'error') {
