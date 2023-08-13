@@ -16,7 +16,7 @@ const AiSpy = ({handleReset}) => {
   const [count, setCount] = useState();
 
   useEffect(() => {
-    axios.get('https://ai-spy-server.onrender.com/')
+    axios.get('https://ai-spy-server.onrender.com')
       .then(response => {
         console.log(response.data[0].count)
         setCount(parseInt(response.data[0].count)); //count parsed to int.
@@ -55,7 +55,7 @@ const AiSpy = ({handleReset}) => {
   const updateCount = async (newCount) => {
     try {
       const response = await axios.put(
-        'https://ai-spy-server.onrender.com/api/updateCount',
+        'https://ai-spy-server.onrender.com/updateCount',
         { count: newCount },
         {
           headers: {
