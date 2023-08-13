@@ -34,18 +34,25 @@ const AiSpy = ({handleReset}) => {
 
   
   const getData = async () => {
-    const data = await axios.post('http://localhost:3000/imageUrl', { input: input });
-    //need to fix server code to get this working.
-    console.log(data)
-    setImageUrl(input);
-    setData(data);
-    setInput("");
+    try {
+      const data = await axios.post('http://localhost:3000/imageUrl', { input: input });
+      
+      setImageUrl(input);
+      setData(data);
+      setInput("");
+
+      setCount(count => {
+        const updatedCount = count + 1;
+        updateCount(updatedCount);
+        return updatedCount; 
+      });
+    }
+    catch (error) {
+      console.log(error)
+    }
+   
     
-    setCount(count => {
-      const updatedCount = count + 1;
-      updateCount(updatedCount);
-      return updatedCount; 
-    });
+    
   }
 
   const updateCount = async (newCount) => {
