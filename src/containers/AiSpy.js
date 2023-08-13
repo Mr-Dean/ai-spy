@@ -16,7 +16,7 @@ const AiSpy = ({handleReset}) => {
   const [count, setCount] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/')
+    axios.get('https://ai-spy-server.onrender.com/')
       .then(response => {
         console.log(response.data[0].count)
         setCount(parseInt(response.data[0].count)); //count parsed to int.
@@ -35,7 +35,7 @@ const AiSpy = ({handleReset}) => {
   
   const getData = async () => {
     try {
-      const data = await axios.post('http://localhost:3000/imageUrl', { input: input });
+      const data = await axios.post('https://ai-spy-server.onrender.com/imageUrl', { input: input });
 
       setImageUrl(input);
       setData(data);
@@ -55,7 +55,7 @@ const AiSpy = ({handleReset}) => {
   const updateCount = async (newCount) => {
     try {
       const response = await axios.put(
-        'http://localhost:3000/api/updateCount',
+        'https://ai-spy-server.onrender.com/api/updateCount',
         { count: newCount },
         {
           headers: {
