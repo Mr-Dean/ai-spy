@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <AiSpy key={version} handleReset={handleReset}/>
-      <ParticlesBg type="cobweb" color="#B0C8FF" num={100} bg={true} />
+      <ParticlesBg type="cobweb" color="#C0C0C0" num={60} bg={true} />
     </div>
     
   );

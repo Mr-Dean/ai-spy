@@ -7,8 +7,6 @@ import Button from "../components/Button/Button";
 import FoundCard from "../components/FoundCard/FouncCard";
 import DisplayImage from "../components/DisplayImage/DisplayImage";
 
-import clarifaiAPI from "../api/clarifai";
-
 
 const AiSpy = ({handleReset}) => {
   const [input, setInput] = useState("");
@@ -36,7 +34,9 @@ const AiSpy = ({handleReset}) => {
 
   
   const getData = async () => {
-    const data = await clarifaiAPI(input);
+    const data = await axios.post('http://localhost:3000/imageUrl', { input: input });
+    //need to fix server code to get this working.
+    console.log(data)
     setImageUrl(input);
     setData(data);
     setInput("");
