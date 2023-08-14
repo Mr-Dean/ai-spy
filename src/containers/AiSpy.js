@@ -16,14 +16,17 @@ const AiSpy = ({handleReset}) => {
   const [count, setCount] = useState();
 
   useEffect(() => {
-    axios.get('https://ai-spy-server.onrender.com')
+    const getCount = async () => {
+      await axios.get('https://ai-spy-server.onrender.com/')
       .then(response => {
-        console.log(response.data[0].count)
+        console.log(response)
         setCount(parseInt(response.data[0].count)); //count parsed to int.
       })
       .catch(error => {
-        console.log(error);
+        console.log('error with get req to /', error);
       });
+    }
+    getCount();
   }, []);
 
   let found = []
@@ -38,7 +41,7 @@ const AiSpy = ({handleReset}) => {
       const data = await axios.post('https://ai-spy-server.onrender.com/imageUrl', { input: input });
 
       setImageUrl(input);
-      setData(data);
+      setData(data.data);
       setInput("");
 
       setCount(count => {
