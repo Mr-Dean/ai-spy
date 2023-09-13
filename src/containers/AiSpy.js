@@ -40,6 +40,8 @@ const AiSpy = ({handleReset}) => {
     try {
       const data = await axios.post('https://ai-spy-server.onrender.com/imageUrl', { input: input });
 
+      console.log(data.data)
+
       setImageUrl(input);
       setData(data.data);
       setInput("");
@@ -80,6 +82,8 @@ const AiSpy = ({handleReset}) => {
   } else {
     console.log('no data')
   }
+
+
  
 
   return (
@@ -93,7 +97,7 @@ const AiSpy = ({handleReset}) => {
         </>
         :
         data === 'error' ?
-        <p>Oops something went wrong...try again</p>
+        <p>Oops something went wrong...</p>
         :
         <>
           <FoundCard found={found}/>
